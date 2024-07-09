@@ -1,6 +1,6 @@
 SYSTEM:
-  NUM_GPUS: 4
-  NUM_CPUS: 16
+  NUM_GPUS: 1
+  NUM_CPUS: 1
 AUGMENTOR:
   SMOOTH: False
 MODEL:
@@ -13,8 +13,8 @@ MODEL:
   FILTERS: [32, 64, 96, 128, 160]
 DATASET:
   IMAGE_NAME: [MitoEM_R/im_train.json, MitoEM_H/im_train.json] 
-  LABEL_NAME: [MitoEM_R/mito_train.json, MitoEM_H/mito_train.json]
-  INPUT_PATH: datasets/MitoEM/ # or your own dataset path
+  LABEL_NAME: [MitoEM_R/gt_train.json, MitoEM_H/gt_train.json]
+  INPUT_PATH: /home/ps/hhy/MitoEM/PyTC/data/MitoEM/ # or your own dataset path
   OUTPUT_PATH: outputs/MitoEM/
   PAD_SIZE: [4, 64, 64]
   DO_CHUNK_TITLE: 1

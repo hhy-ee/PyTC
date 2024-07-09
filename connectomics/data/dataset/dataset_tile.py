@@ -1,5 +1,7 @@
 from __future__ import print_function, division
 from typing import Optional, List, Union
+import os
+import sys
 import numpy as np
 import json
 import random
@@ -11,6 +13,8 @@ from scipy.ndimage import zoom
 from . import VolumeDataset
 from ..utils import reduce_label, tile2volume
 
+base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, base_dir)
 
 class TileDataset(torch.utils.data.Dataset):
     r"""Dataset class for large-scale tile-based datasets. Large-scale volumetric datasets are usually stored as 

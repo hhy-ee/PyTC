@@ -1,6 +1,8 @@
 MODEL:
   OUT_PLANES: 2
   TARGET_OPT: ["0", "4-1-1"]
+  INPUT_SIZE: [17, 225, 225]
+  OUTPUT_SIZE: [17, 225, 225]
   LOSS_OPTION:
     - - WeightedBCEWithLogitsLoss
       - DiceLoss
@@ -11,6 +13,6 @@ MODEL:
   OUTPUT_ACT: [["none", "sigmoid"], ["none", "sigmoid"]]
 INFERENCE:
   OUTPUT_ACT: ["sigmoid", "sigmoid"]
-  OUTPUT_PATH: outputs/MitoEM_BC/test/
+  OUTPUT_PATH: outputs/MitoEM_BC_sp/test/
 DATASET:
-  OUTPUT_PATH: outputs/MitoEM_BC/
+  OUTPUT_PATH: outputs/MitoEM_BC_sp/

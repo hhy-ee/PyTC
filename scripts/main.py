@@ -1,10 +1,46 @@
 import os
+os.environ['CUDA_VISIBLE_DEVICES'] = '0'
+import argparse
+import sys
 import torch
 
-from connectomics.utils.system import get_args, init_devices
+from connectomics.utils.system import init_devices
 from connectomics.config import load_cfg, save_all_cfg
 from connectomics.engine import Trainer
 
+base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, base_dir)
+
+def get_args():
+    parser = argparse.ArgumentParser(description="Model Training & Inference")
+    parser.add_argument('--config-file', type=str,
+                        help='configuration file (yaml)')
+    parser.add_argument('--config-base', type=str,
+                        help='base configuration file (yaml)', default=None)
+    parser.add_argument('--inference', action='store_true',
+                        help='inference mode')
+    parser.add_argument('--distributed', action='store_true', default=False,
+                        help='distributed training')
+    parser.add_argument('--checkpoint', type=str, default=None,
+                        help='path to load the checkpoint')
+    parser.add_argument('--manual-seed', type=int, default=None)
+    parser.add_argument('--local_world_size', type=int, default=1,
+                        help='number of GPUs each process.')
+    parser.add_argument('--local_rank', type=int, default=None,
+                        help='node rank for distributed training')
+    parser.add_argument('--debug', action='store_true',
+                        help='run the scripts in debug mode')
+    # Merge configs from command line (e.g., add 'SYSTEM.NUM_GPUS 8').
+    parser.add_argument(
+        "opts",
+        help="Modify config options using the command-line",
+        default=None,
+        nargs=argparse.REMAINDER,
+    )
+    args = parser.parse_args()
+    args.config_file = '/home/ps/hhy/MitoEM/PyTC/configs/MitoEM/MitoEM-BC-sp.yaml'
+    args.config_base = '/home/ps/hhy/MitoEM/PyTC/configs/MitoEM/MitoEM-Base.yaml'
+    return args
 
 def main():
     args = get_args()
@@ -12,7 +48,7 @@ def main():
     device = init_devices(args, cfg)
 
     if args.local_rank == 0 or args.local_rank is None:
-        # In distributed training, only print and save the configurations 
+        # In distributed training, only print and save the configurations
         # using the node with local_rank=0.
         print("PyTorch: ", torch.__version__)
         print(cfg)
