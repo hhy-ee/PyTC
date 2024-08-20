@@ -17,6 +17,8 @@ def get_args():
                         help='configuration file (yaml)')
     parser.add_argument('--config-base', type=str,
                         help='base configuration file (yaml)', default=None)
+    parser.add_argument('--data_subset', type=str,
+                        help='choose the subset of a dataset', default=None)
     parser.add_argument('--inference', action='store_true',
                         help='inference mode')
     parser.add_argument('--distributed', action='store_true', default=False,
@@ -38,8 +40,8 @@ def get_args():
         nargs=argparse.REMAINDER,
     )
     args = parser.parse_args()
-    args.config_file = '/home/ps/hhy/MitoEM/PyTC/configs/MitoEM/MitoEM-BC-sp.yaml'
-    args.config_base = '/home/ps/hhy/MitoEM/PyTC/configs/MitoEM/MitoEM-Base.yaml'
+    args.config_file = './configs/MitoEM/MitoEM-R-3d-BC-reso1e0-scale1e-0.yaml'
+    args.config_base = './configs/MitoEM/MitoEM-Base.yaml'
     return args
 
 def main():

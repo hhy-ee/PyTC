@@ -97,6 +97,7 @@ class Trainer(TrainerBase):
 
             # load data
             sample = next(self.dataloader)
+
             volume = sample.out_input
             target, weight = sample.out_target_l, sample.out_weight_l
             self.data_time = time.perf_counter() - self.start_time
@@ -109,6 +110,35 @@ class Trainer(TrainerBase):
 
             self._train_misc(loss, pred, volume, target, weight,
                              iter_total, losses_vis)
+
+        self.maybe_save_swa_model()
+
+    def train_my(self):
+        r"""Training function of the trainer class.
+        """
+        self.model.train()
+
+        i = 0
+        # load data
+        for sample in self.dataloader:
+            iter_total = self.start_iter + i
+            self.start_time = time.perf_counter()
+            self.optimizer.zero_grad()
+
+            volume = sample.out_input
+            target, weight = sample.out_target_l, sample.out_weight_l
+            self.data_time = time.perf_counter() - self.start_time
+
+            # prediction
+            volume = volume.to(self.device, non_blocking=True)
+            with autocast(enabled=self.cfg.MODEL.MIXED_PRECESION):
+                pred = self.model(volume)
+                loss, losses_vis = self.criterion(pred, target, weight)
+
+            self._train_misc(loss, pred, volume, target, weight,
+                             iter_total, losses_vis)
+            if i >= self.total_iter_nums:
+                break
 
         self.maybe_save_swa_model()
 
@@ -439,12 +469,13 @@ class Trainer(TrainerBase):
             num_chunk = self.total_iter_nums // self.cfg.DATASET.DATA_CHUNK_ITER
             self.total_iter_nums = self.cfg.DATASET.DATA_CHUNK_ITER
             for chunk in range(num_chunk):
-                self.dataset.updatechunk()
+                self.dataset.updatechunk()   # main start
                 self.dataloader = build_dataloader(self.cfg, self.augmentor, mode,
                                                    dataset=self.dataset.dataset)
                 self.dataloader = iter(self.dataloader)
                 print('start train for chunk %d' % chunk)
-                self.train()
+                # self.train()
+                self.train_my()
                 print('finished train for chunk %d' % chunk)
                 self.start_iter += self.cfg.DATASET.DATA_CHUNK_ITER
                 del self.dataloader

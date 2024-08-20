@@ -13,9 +13,6 @@ from scipy.ndimage import zoom
 from . import VolumeDataset
 from ..utils import reduce_label, tile2volume
 
-base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-sys.path.insert(0, base_dir)
-
 class TileDataset(torch.utils.data.Dataset):
     r"""Dataset class for large-scale tile-based datasets. Large-scale volumetric datasets are usually stored as 
     individual tiles. Directly loading them as a single array for training and inference is infeasible. This 
@@ -59,6 +56,7 @@ class TileDataset(torch.utils.data.Dataset):
                  label_json: Optional[List[str]] = None,
                  valid_mask_json: Optional[List[str]] = None,
                  mode: str = 'train',
+                 subset: str = None,
                  pad_size: List[int] = [0, 0, 0],
                  data_scale: List[float] = [1.0, 1.0, 1.0],
                  coord_range: Optional[List[List[int]]] = None,
@@ -67,6 +65,7 @@ class TileDataset(torch.utils.data.Dataset):
 
         self.kwargs = kwargs
         self.mode = mode
+        self.subset = subset
         self.chunk_iter = chunk_iter
         self.pad_size = pad_size
         self.data_scale = data_scale
@@ -231,16 +230,17 @@ class TileDataset(torch.utils.data.Dataset):
             ]
             valid_mask = self.maybe_scale(valid_mask, order=0)
 
-        self.dataset = VolumeDataset(volume, label, valid_mask, mode=self.mode, do_relabel=self.do_relabel,
+        self.dataset = VolumeDataset(volume, label, valid_mask, mode=self.mode, subset=self.subset, do_relabel=self.do_relabel,
                                      # specify chunk iteration number for training (-1 for inference)
                                      iter_num=self.chunk_iter if self.mode == 'train' else -1,
                                      **self.kwargs)
 
     def maybe_scale(self, data, order=0):
-        if (np.array(self.data_scale) != 1).any():
+        data_scale = [float(i) for i in self.data_scale]
+        if (np.array(data_scale) != 1).any():
             for i in range(len(data)):
                 dt = data[i].dtype
-                data[i] = zoom(data[i], self.data_scale,
+                data[i] = zoom(data[i], data_scale,
                                order=order).astype(dt)
 
         return data

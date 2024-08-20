@@ -1,8 +1,8 @@
 MODEL:
   OUT_PLANES: 2
   TARGET_OPT: ["0", "4-1-1"]
-  INPUT_SIZE: [17, 225, 225]
-  OUTPUT_SIZE: [17, 225, 225]
+  INPUT_SIZE: [32, 256, 256]
+  OUTPUT_SIZE: [32, 256, 256]
   LOSS_OPTION:
     - - WeightedBCEWithLogitsLoss
       - DiceLoss
@@ -13,6 +13,11 @@ MODEL:
   OUTPUT_ACT: [["none", "sigmoid"], ["none", "sigmoid"]]
 INFERENCE:
   OUTPUT_ACT: ["sigmoid", "sigmoid"]
-  OUTPUT_PATH: outputs/MitoEM_BC_sp/test/
+  OUTPUT_PATH: outputs/MitoEM-R-BC-reso1e0/test/
+  DATA_SCALE: [1, 1, 1]
 DATASET:
-  OUTPUT_PATH: outputs/MitoEM_BC_sp/
+  OUTPUT_PATH: outputs/MitoEM-R-3d-BC-reso1e0-scale1e-0/
+  SUBSETS: ['Rat', 'Human']
+  VALID_SET: 'Rat'
+  DATA_CHUNK_NUM: [4, 8, 8]
+  DATA_SCALE: [1, 1, 1]

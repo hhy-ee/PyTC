@@ -186,7 +186,8 @@ _C.MODEL.UNETR_DROPOUT_RATE = 0.0
 # Dataset
 # -----------------------------------------------------------------------------
 _C.DATASET = CN()
-
+_C.DATASET.SUBSETS = None
+_C.DATASET.VALID_SET = None
 # Scale ratio of the input data for different resolutions.
 # Using a DATA_SCALE of [1., 0.5, 0.5] will downsample the
 # original image by two times (e.g., 4nm -> 8nm).

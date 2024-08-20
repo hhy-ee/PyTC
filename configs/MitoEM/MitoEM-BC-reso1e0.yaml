@@ -1,0 +1,18 @@
+MODEL:
+  OUT_PLANES: 2
+  TARGET_OPT: ["0", "4-1-1"]
+  INPUT_SIZE: [32, 256, 256]
+  OUTPUT_SIZE: [32, 256, 256]
+  LOSS_OPTION:
+    - - WeightedBCEWithLogitsLoss
+      - DiceLoss
+    - - WeightedBCEWithLogitsLoss
+      - DiceLoss
+  LOSS_WEIGHT: [[1.0, 0.5], [1.0, 0.5]]
+  WEIGHT_OPT: [["1", "0"], ["1", "0"]]
+  OUTPUT_ACT: [["none", "sigmoid"], ["none", "sigmoid"]]
+INFERENCE:
+  OUTPUT_ACT: ["sigmoid", "sigmoid"]
+  OUTPUT_PATH: outputs/MitoEM-BC-reso1e0/test/
+DATASET:
+  OUTPUT_PATH: outputs/MitoEM-BC-reso1e0/

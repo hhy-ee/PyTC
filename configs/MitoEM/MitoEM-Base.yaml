@@ -14,7 +14,7 @@ MODEL:
 DATASET:
   IMAGE_NAME: [MitoEM_R/im_train.json, MitoEM_H/im_train.json] 
   LABEL_NAME: [MitoEM_R/gt_train.json, MitoEM_H/gt_train.json]
-  INPUT_PATH: /home/ps/hhy/MitoEM/PyTC/data/MitoEM/ # or your own dataset path
+  INPUT_PATH: data/MitoEM/ # or your own dataset path
   OUTPUT_PATH: outputs/MitoEM/
   PAD_SIZE: [4, 64, 64]
   DO_CHUNK_TITLE: 1
@@ -26,7 +26,7 @@ SOLVER:
   ITERATION_STEP: 1
   ITERATION_SAVE: 5000
   ITERATION_TOTAL: 300000
-  SAMPLES_PER_BATCH: 2
+  SAMPLES_PER_BATCH: 4
 INFERENCE:
   INPUT_SIZE:   [17, 257, 257]
   OUTPUT_SIZE:  [17, 257, 257]

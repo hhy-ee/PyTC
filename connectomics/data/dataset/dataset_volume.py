@@ -63,6 +63,7 @@ class VolumeDataset(torch.utils.data.Dataset):
                  erosion_rates: Optional[List[int]] = None,
                  dilation_rates: Optional[List[int]] = None,
                  mode: str = 'train',
+                 subset: str = None,
                  do_2d: bool = False,
                  iter_num: int = -1,
                  do_relabel: bool = True,
@@ -77,6 +78,7 @@ class VolumeDataset(torch.utils.data.Dataset):
 
         assert mode in ['train', 'val', 'test']
         self.mode = mode
+        self.subset = subset
         self.do_2d = do_2d
         self.do_relabel = do_relabel
 
@@ -225,9 +227,14 @@ class VolumeDataset(torch.utils.data.Dataset):
         # random: multithread
         # np.random: same seed
         pos = [0, 0, 0, 0]
+
         # pick a dataset
-        did = self._index_to_dataset(random.randint(0, self.sample_num_a-1))
+        if self.subset is not None:
+            did = self.subset
+        else:
+            did = self._index_to_dataset(random.randint(0, self.sample_num_a-1))
         pos[0] = did
+
         # pick a position
         tmp_size = count_volume(
             self.volume_size[did], vol_size, self.sample_stride)

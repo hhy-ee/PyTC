@@ -280,6 +280,11 @@ def get_dataset(cfg,
         sample_stride = cfg.INFERENCE.STRIDE
         iter_num = -1
 
+    if cfg.DATASET.SUBSETS is not None and cfg.DATASET.VALID_SET is not None:
+        subset = cfg.DATASET.SUBSETS.index(cfg.DATASET.VALID_SET)
+    else:
+        subset = None
+
     shared_kwargs = {
         "sample_volume_size": sample_volume_size,
         "sample_label_size": sample_label_size,
@@ -288,6 +293,7 @@ def get_dataset(cfg,
         "target_opt": topt,
         "weight_opt": wopt,
         "mode": mode,
+        "subset": subset,
         "do_2d": cfg.DATASET.DO_2D,
         "reject_size_thres": cfg.DATASET.REJECT_SAMPLING.SIZE_THRES,
         "reject_diversity": cfg.DATASET.REJECT_SAMPLING.DIVERSITY,
