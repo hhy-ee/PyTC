@@ -40,8 +40,12 @@ def get_args():
         nargs=argparse.REMAINDER,
     )
     args = parser.parse_args()
-    args.config_file = './configs/MitoEM/MitoEM-R-3d-BC-reso1e0-scale1e-0.yaml'
-    args.config_base = './configs/MitoEM/MitoEM-Base.yaml'
+    # args.config_file = './configs/MitoEM/MitoEM-R-3d-BC-reso1e0-scale1e-0.yaml'
+    # args.config_base = './configs/MitoEM/MitoEM-Base.yaml'
+
+    args.config_file = './configs/SNEMI/SNEMI-Affinity-UNet.yaml'
+    args.config_base = './configs/SNEMI/SNEMI-Base.yaml'
+
     return args
 
 def main():

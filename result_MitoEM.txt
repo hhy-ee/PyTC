@@ -1,0 +1,35 @@
+# one stage
+MitoEM_3D_R_BC_1stage_base  3762s 75.2
+
+# two stage
+MitoEM_R_BC_2stage_3D_base_t0.1  221s + 692s 75.4
+MitoEM_R_BC_2stage_3D_base_t0.3  221s + 510s 74.9
+MitoEM_R_BC_2stage_3D_base_t0.5  221s + 357s 73.7
+MitoEM_R_BC_2stage_3D_base_t0.9  221s + 297s 71.2
+
+# our method
+MitoEM_R_BC_2stage_3D_ours_t0.1  221s + 202s 75.1
+
+----------------------------------------------------------
+# one stage
+MitoEM_2D_R_BC_1stage_base  2103s 65.3
+
+# two stage
+MitoEM_2D_R_BC_2stage_base_t0.1  75s + 232s 65.6
+MitoEM_2D_R_BC_2stage_base_t0.3  75s + 201s 65.3
+MitoEM_2D_R_BC_2stage_base_t0.5  75s + 153s 64.1
+
+# our method nmm_threshold=0.7
+save_cluster_roi_th_0.1_nms_1.0_nmm_0.7_pack_crop_clu_l1e-2_single_loss_whole_region_fix_model_fix_size_l1: 75s + 70s 64.9
+save_cluster_roi_th_0.1_nms_1.0_nmm_0.7_pack_crop_clu_l1e-2_fusion_loss_whole_region_fix_model_fix_size_l1: 75s + 124s 65.1
+save_cluster_roi_th_0.1_nms_1.0_nmm_0.7_pack_crop_clu_l1e-3_single_loss_whole_region_fix_model_fix_size_l1: 75s + 48s 62.8
+save_cluster_roi_th_0.1_nms_1.0_nmm_0.7_pack_crop_clu_l1e-3_fusion_loss_whole_region_fix_model_fix_size_l1: 75s + 93s 64.5
+
+save_cluster_roi_th_0.1_nms_1.0_nmm_0.7_pack_resize_clu_l1e-2_single_loss_whole_region_fix_model_fix_size_l1: 75s + 70s 58.2
+save_cluster_roi_th_0.1_nms_1.0_nmm_0.7_pack_resize_clu_l1e-2_fusion_loss_whole_region_fix_model_fix_size_l1: 75s + 114s 58.6
+
+# our method nmm_threshold=0.5
+save_cluster_roi_th_0.1_nms_1.0_nmm_0.5_pack_crop_clu_l1e-2_single_loss_whole_region_fix_model_fix_size_l1: 75s + 82s 65.2
+save_cluster_roi_th_0.1_nms_1.0_nmm_0.5_pack_crop_clu_l1e-2_fusion_loss_whole_region_fix_model_fix_size_l1: 75s + 105s 65.1
+save_cluster_roi_th_0.1_nms_1.0_nmm_0.5_pack_crop_clu_l1e-3_single_loss_whole_region_fix_model_fix_size_l1: 75s + 56s 61.9
+save_cluster_roi_th_0.1_nms_1.0_nmm_0.5_pack_crop_clu_l1e-3_fusion_loss_whole_region_fix_model_fix_size_l1: 75s + 114s 65.4

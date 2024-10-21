@@ -1,0 +1,4 @@
+# one stage
+SNEMI_Affinity_UNETR_1stage_base_watershed 4h6min32s+ 2131s 0.02591  
+SNEMI_Affinity_UNETR_1stage_downsample_watershed  4h6min32s+ 503s 0.02823
+SNEMI_Affinity_UNETR_1stage_2D_watershed +  4h6min32s + 1877s  0.02636  
