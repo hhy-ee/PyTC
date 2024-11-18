@@ -1,4 +1,27 @@
 # one stage
-SNEMI_Affinity_UNETR_1stage_base_watershed 4h6min32s+ 2131s 0.02591  
+SNEMI_Affinity_UNETR_1stage_base_watershed 4h6min32s+ 6131s 0.02591  
 SNEMI_Affinity_UNETR_1stage_downsample_watershed  4h6min32s+ 503s 0.02823
 SNEMI_Affinity_UNETR_1stage_2D_watershed +  4h6min32s + 1877s  0.02636  
+
+SNEMI-Affinity-UNET-SR 4h11min41s+ 2131s 0.02588 
+SNEMI-Affinity-UNet-LR 4h12min23s+ 2189s 0.02579 
+SNEMI-Affinity-UNet-Contour 4h19min12s+ 2177s 0.02503 
+
+SNEMI-Affinity-UNet-2stage_2D_watershed 10min12s + 50min35s + 2047s 0.02797
+SNEMI-Affinity-Contour-UNet-2stage_2D_watershed  11min49s + 56min22s + 2104s  0.02636
+
+
+SNEMI-Affinity-UNet-ours_2D_watershed 10min12s + 19min25s + 1897s 0.02693
+SNEMI-Affinity-UNet-ours_downsample_watershed 10min12s + 19min25s + 419s 0.02833
+
+SNEMI-Affinity-Contour-UNet-ours_2D_watershed 11min49s + 22min33s + 1923s 0.02677
+SNEMI-Affinity-Contour-UNet-ours_downsample_watershed 11min49s + 22min33s + 440s 0.02812
+
+SNEMI-Affinity-UNet-ours_base_watershed  10min12s + 19min25s + 5513s 0.02639
+
+
+
+SNEMI-Affinity-UNet-ours_multiprocess_watershed_512_512_64
+SNEMI-Affinity-UNet-ours_multiprocess_watershed_512_512_128
+SNEMI-Affinity-UNet-ours_multiprocess_watershed_1024_1024_64
+SNEMI-Affinity-UNet-ours_multiprocess_watershed_1024_1024_128
